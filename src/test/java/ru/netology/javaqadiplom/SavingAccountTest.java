@@ -119,4 +119,19 @@ public class SavingAccountTest {
 
         Assertions.assertEquals(true, account.add(8_000));
     }
+
+    //9) Должно быть исключение, если  initialBalance < minBalance (по логике), однако его нет (добавить его в if  к rate<0)
+    @Test
+    public void createAccountWithInitBalanceLessThanMinBalance() {
+
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    3000,
+                    4000,
+                    5000,
+                    10
+            );
+        });
+    }
 }
