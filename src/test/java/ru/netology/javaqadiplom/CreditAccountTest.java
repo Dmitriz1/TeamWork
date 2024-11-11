@@ -56,6 +56,17 @@ public class CreditAccountTest {
     }
 
     @Test
+    public void shouldCountYearChangeWithFraction() {
+        CreditAccount account = new CreditAccount(
+                -13,
+                5_000,
+                15
+        );
+
+        Assertions.assertEquals(1.95, account.yearChange());
+    }
+
+    @Test
     public void payExceedingLimit() {
         CreditAccount account = new CreditAccount(
                 1_000,
