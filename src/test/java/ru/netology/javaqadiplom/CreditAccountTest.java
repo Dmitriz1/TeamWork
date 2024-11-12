@@ -56,12 +56,12 @@ public class CreditAccountTest {
     @Test
     public void shouldCountYearChangeWithFraction() {
         CreditAccount account = new CreditAccount(
-                -13,
+                100,
                 5_000,
                 15
         );
-
-        Assertions.assertEquals(1.95, account.yearChange());
+        account.pay(113);
+        Assertions.assertEquals(1, account.yearChange());
     }
 
     @Test
