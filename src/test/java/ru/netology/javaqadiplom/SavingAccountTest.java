@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 public class SavingAccountTest {
 
     @Test
-    //1) В методе "add" amount должен суммироваться с initialBalance, а не присваиваться balance
     public void shouldAddLessThanMaxBalance() {
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -20,7 +19,6 @@ public class SavingAccountTest {
         Assertions.assertEquals(2000 + 3_000, account.getBalance());
     }
 
-    //2) По идее "сумма процентов" приводится к целому числу, т.е. конечный результат должен приводится к типу int, а не в промежуточных уже отбрасываться дробная часть -> ошибка в вычислениях
     @Test
     public void countYearChange() {
         SavingAccount account = new SavingAccount(
@@ -33,7 +31,6 @@ public class SavingAccountTest {
         Assertions.assertEquals(52, account.yearChange());
     }
 
-    //3) Изменение баланса счета происходит в любом случае, если amount<=0, т.к. изменение баланса происходит перед проверкой условия изменения
     @Test
     public void countPay() {
         SavingAccount account = new SavingAccount(
@@ -47,7 +44,6 @@ public class SavingAccountTest {
         Assertions.assertEquals(3000, account.getBalance());
     }
 
-    //4) Должно быть исключение, если  minBalance < 0, однако его нет (добавить его в if  к rate<0)
     @Test
     public void createAccountWithNegativeMinBalance() {
 
@@ -62,7 +58,6 @@ public class SavingAccountTest {
         });
     }
 
-    //5) Должно быть исключение, если  minBalance >= maxBalance, однако его нет (добавить его в if  к rate<0)
     @Test
     public void createAccountWithMinBalanceLargerThanMinBalance() {
 
@@ -77,7 +72,6 @@ public class SavingAccountTest {
         });
     }
 
-    //6) Должно быть исключение, если  initialBalance > maxBalance (по логике), однако его нет (добавить его в if  к rate<0)
     @Test
     public void createAccountWithInitBalanceLargerThanMaxBalance() {
 
@@ -92,8 +86,6 @@ public class SavingAccountTest {
         });
     }
 
-    //7) Ожидается, что итоговый balance может быть равен minBalance, т.к. "сберегательный счёт может иметь баланс только в пределах от указанного минимального до указанного максимального включительно."
-    //для этого сделать нестрогим проверку в строке 49 (if (balance >= minBalance))
     @Test
     public void countPayBalanceEqualsMinBalance() {
         SavingAccount account = new SavingAccount(
@@ -106,8 +98,6 @@ public class SavingAccountTest {
         Assertions.assertEquals(true, account.pay(2900));
     }
 
-    //8) В методе "add" amount должен суммироваться с initialBalance, а не присваиваться balance +
-    //+ сделать нестрогим условие (if (balance + amount < maxBalance)) по ТЗ включительно
     @Test
     public void shouldAddEqMaxBalance() {
         SavingAccount account = new SavingAccount(
@@ -120,7 +110,6 @@ public class SavingAccountTest {
         Assertions.assertEquals(true, account.add(8_000));
     }
 
-    //9) Должно быть исключение, если  initialBalance < minBalance (по логике), однако его нет (добавить его в if  к rate<0)
     @Test
     public void createAccountWithInitBalanceLessThanMinBalance() {
 

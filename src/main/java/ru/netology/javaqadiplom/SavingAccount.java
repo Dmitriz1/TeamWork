@@ -20,11 +20,19 @@ public class SavingAccount extends Account {
      * @param rate - неотрицательное число, ставка в процентах годовых на остаток
      */
     public SavingAccount(int initialBalance, int minBalance, int maxBalance, int rate) {
-        if (rate < 0) {
-            throw new IllegalArgumentException(
-              "Накопительная ставка не может быть отрицательной, а у вас: " + rate
-            );
+        if (minBalance < 0) {
+            throw new IllegalArgumentException("Минимальный баланс не может быть отрицательным.");
         }
+        if (minBalance > maxBalance) {
+            throw new IllegalArgumentException("Минимальный баланс не может превышать максимальный.");
+        }
+        if (initialBalance < minBalance || initialBalance > maxBalance) {
+            throw new IllegalArgumentException("Начальный баланс должен быть в пределах от минимального до максимального.");
+        }
+        if (rate < 0) {
+            throw new IllegalArgumentException("Накопительная ставка не может быть отрицательной, а у вас: " + rate);
+        }
+
         this.balance = initialBalance;
         this.minBalance = minBalance;
         this.maxBalance = maxBalance;
@@ -42,11 +50,11 @@ public class SavingAccount extends Account {
      */
     @Override
     public boolean pay(int amount) {
-        if (amount <= 0) {
+        if (amount < 0) {
             return false;
         }
-        balance = balance - amount;
-        if (balance > minBalance) {
+        if (balance - amount >= minBalance) {
+            balance -= amount;
             return true;
         } else {
             return false;
@@ -66,11 +74,11 @@ public class SavingAccount extends Account {
      */
     @Override
     public boolean add(int amount) {
-        if (amount <= 0) {
+        if (amount < 0) {
             return false;
         }
-        if (balance + amount < maxBalance) {
-            balance = amount;
+        if (balance + amount <= maxBalance) {
+            balance += amount;
             return true;
         } else {
             return false;
@@ -86,7 +94,7 @@ public class SavingAccount extends Account {
      */
     @Override
     public int yearChange() {
-        return balance / 100 * rate;
+        return (int) (balance / 100.0 * rate);
     }
 
     public int getMinBalance() {
