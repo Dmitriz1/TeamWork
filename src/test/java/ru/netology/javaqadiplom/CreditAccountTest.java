@@ -32,16 +32,14 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldNotAddToNegativeBalance() {
-        CreditAccount account = new CreditAccount(
-                -1_000,
-                5_000,
-                15
-        );
-
-        account.add(3_000);
-
-        Assertions.assertEquals(false, account.getBalance());
+    public void createAccountWithNegativeBalance() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            CreditAccount account = new CreditAccount(
+                    -3_000,
+                    500,
+                    15
+            );
+        });
     }
 
     @Test
