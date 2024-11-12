@@ -68,7 +68,7 @@ public class CreditAccountTest {
     public void payExceedingLimit() {
         CreditAccount account = new CreditAccount(
                 1_000,
-                500,
+                100,
                 10);
 
         Assertions.assertEquals(false, account.pay(1_200));
