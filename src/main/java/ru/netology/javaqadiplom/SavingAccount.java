@@ -20,7 +20,7 @@ public class SavingAccount extends Account {
      * @param rate - неотрицательное число, ставка в процентах годовых на остаток
      */
     public SavingAccount(int initialBalance, int minBalance, int maxBalance, int rate) {
-        if (minBalance < 0) {
+        if (minBalance <= 0) {
             throw new IllegalArgumentException("Минимальный баланс не может быть отрицательным.");
         }
         if (minBalance > maxBalance) {
